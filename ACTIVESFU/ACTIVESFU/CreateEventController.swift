@@ -41,36 +41,37 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let options = ["Private", "Public"]
     var selected = ""
 
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+ 
     @IBAction func createEventButton(_ sender: UIButton) {
 
-        let email: String = "test99@gmail.com"
-        let password: String = "123456"
+//        let email: String = "test99@gmail.com"
+//        let password: String = "123456"
 
         //login to user account:
             //checking the authentication:
-            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                else{
-                    print("login successful")
-                }
-            })
+        if FIRAuth.auth()?.currentUser?.uid == nil {
+              print("login not valid")
+        }
+        else{
+            print("login valid")
+        }
             //get the user info
             let uid = FIRAuth.auth()?.currentUser?.uid
             let ref = FIRDatabase.database().reference()
             let UsersRef = ref.child("Users").child(uid!)
             UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                //print(snapshot)
+                print(snapshot)
             }, withCancel: nil)
 
             //create event
             let EventRef = ref.child("Events")
             let EventKey = EventRef.childByAutoId().key
 
-            let owner = uid
-            let title = eventTextField.text!
+            let ownerOfEvent = uid
+            let titleOfEvent = eventTextField.text!
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMMM dd, yyyy at hh:mm"
             let date = datePicker.date as NSDate!
@@ -80,8 +81,8 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let privacy = selected
 
             //insert event:
-            let eventContent = ["uid": owner,
-                                "title": title,
+            let eventContent = ["uid": ownerOfEvent,
+                                "title": titleOfEvent,
                                 "date": dateString,
                                 "location": location,
                                 "privacy": privacy] as [String : Any]
@@ -107,7 +108,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
          "privacy": privacy1]
          EventRef.child(EventKey).updateChildValues(eventUpateContent)
  */
-
+        dismiss(animated: true, completion: nil)
 
     }
     

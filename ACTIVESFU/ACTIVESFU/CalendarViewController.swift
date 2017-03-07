@@ -35,7 +35,8 @@ class ViewCalendarController: UIViewController {
     
     
     //MARK: Internal
-    
+
+
     
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
@@ -53,6 +54,16 @@ class ViewCalendarController: UIViewController {
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
     let dimPurple = UIColor(colorWithHexValue: 0x574865)
 
+    
+    @IBAction func menuButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func backToMenu(){
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) { //setup display of month and year
         
         guard let startDate = visibleDates.monthDates.first else {
@@ -186,13 +197,8 @@ extension ViewCalendarController: JTAppleCalendarViewDataSource, JTAppleCalendar
         handleCellTextColor(view: cell, cellState: cellState)
         
         //navigate to create event
-        let segueEvent = storyboard?.instantiateViewController(withIdentifier: "CreateEvent_ID") as! CreateEventController
-        
-        /*
-        segueEvent.monthName = "Create an event for \(dateSelected)"
-        segueEvent.dateID = dateSelected
-         */
-        navigationController?.pushViewController(segueEvent, animated: true)
+        let createEventController = storyboard?.instantiateViewController(withIdentifier: "CreateEvent_ID") as! CreateEventController
+        present(createEventController, animated: true, completion: nil)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {

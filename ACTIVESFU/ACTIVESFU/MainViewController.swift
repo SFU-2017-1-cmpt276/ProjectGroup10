@@ -9,35 +9,81 @@
 //  if yes, the app stays on the page. If not, the app forces the user out and is brought to the login screen.
 //
 //  Bugs:
-//
+//  user starts logged in, seems like the uid is hardcoded to test99@gmail.com
 //
 //
 //  Changes:
+//
+//  Completed auto login
+//  Changed initial view to this one for autologin feature
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
 
 import UIKit
 
+import Firebase
+
+
+//MARK: MainViewController
+
+
 class MainViewController: UIViewController {
 
+    
+    //MARK: Internal
+
+    @IBAction func viewBuddiesSegue(_ sender: UIButton) {
+        
+        let buddiesController = storyboard?.instantiateViewController(withIdentifier: "viewBuddiesID") as! BuddiesViewController
+        present(buddiesController, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func calendarSegue(_ sender: UIButton) {
+        let calendarController = storyboard?.instantiateViewController(withIdentifier: "calendarViewID") as! ViewCalendarController
+        present(calendarController, animated: true, completion: nil)
+    }
+    
+    func checkIfUserIsLoggedIn(){
+        
+        if FIRAuth.auth()?.currentUser?.uid == nil{
+            print("user isn't logged in")
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        }
+        else {
+            
+            print("User is logged in")
+        }
+    }
+
+
+    
+    func handleLogout() {
+        
+        do {
+        
+            try FIRAuth.auth()?.signOut()
+        } catch let logoutError { print(logoutError) }
+        
+        let loginController = storyboard?.instantiateViewController(withIdentifier: "LoginViewID") as! LoginViewController
+        present(loginController, animated: true, completion: nil)
+    }
+    
+    //MARK: UIViewController
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("Users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            print(snapshot)
+        }, withCancel: nil)
+    
+        
+        checkIfUserIsLoggedIn()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
+	

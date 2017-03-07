@@ -14,7 +14,7 @@
 //
 //  Changes:
 //  Allowed keyboard to be dismissed when pressing 'done'
-//
+//  Changed transition from navigate to dismiss
 //
 //
 //
@@ -85,17 +85,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             else{
                         
                 print("login successful")
-                let loggedInScene = self.navigationController?.storyboard?.instantiateViewController(withIdentifier: "mainmenuVC_ID") as! MainViewController
-                self.navigationController?.pushViewController(loggedInScene, animated: true)
+                self.dismiss(animated: true, completion: nil)
             }
         })
-        let userUID = FIRAuth.auth()?.currentUser?.uid
-        self.firebaseReference = FIRDatabase.database().reference()
-        let userReferenceInDatabase = self.firebaseReference.child("Users").child(userUID!)
-                
-        userReferenceInDatabase.observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot)
-        }, withCancel: nil)
     }
     
     func handleRegister() {
@@ -127,6 +119,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 print("Create account successful")
+                self.dismiss(animated: true, completion: nil)
             })
         })
     }

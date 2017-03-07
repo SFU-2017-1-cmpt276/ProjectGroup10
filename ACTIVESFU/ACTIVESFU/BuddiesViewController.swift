@@ -33,9 +33,14 @@ class BuddiesViewController: UITableViewController{
     
     //MARK: Internal
     
+
     
     var cellID = "cellID"
     var userFormatInDatabase = [User]()
+    
+    @IBAction func backMenu(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
     
     func fetchAllBuddiesInDatabase() {
         
@@ -57,6 +62,11 @@ class BuddiesViewController: UITableViewController{
         }, withCancel: nil)
     }
     
+    func dismissView() {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     func viewUsernameInDatabase() {
         
         let UID = FIRAuth.auth()?.currentUser?.uid
@@ -74,6 +84,8 @@ class BuddiesViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("This is buddies!")
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         
