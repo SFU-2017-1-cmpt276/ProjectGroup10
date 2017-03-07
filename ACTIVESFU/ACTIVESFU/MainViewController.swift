@@ -50,9 +50,9 @@ class MainViewController: UIViewController {
         present(calendarController, animated: true, completion: nil)
     }
     
-    func checkIfUserIsLoggedIn(){
+    func checkIfUserIsLoggedIn() {
         
-        if FIRAuth.auth()?.currentUser?.uid == nil{
+        if FIRAuth.auth()?.currentUser?.uid == nil {
             print("user isn't logged in")
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
@@ -74,6 +74,7 @@ class MainViewController: UIViewController {
         let loginController = storyboard?.instantiateViewController(withIdentifier: "LoginViewID") as! LoginViewController
         present(loginController, animated: true, completion: nil)
     }
+    
     
     //MARK: UIViewController
     
