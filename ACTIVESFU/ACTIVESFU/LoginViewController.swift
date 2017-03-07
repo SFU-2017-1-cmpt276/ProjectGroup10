@@ -40,6 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var firebaseReference: FIRDatabaseReference!
     
     @IBAction func loginButton(_ sender: UIButton) {
+
         
         if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
             
@@ -73,6 +74,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func segueToSurvey(){
+        UINavigationBar.appearance().barTintColor = UIColor.purple
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
+        let surveyController = QuestionController()
+        let navController = UINavigationController(rootViewController: surveyController)
+            self.present(navController, animated: true, completion: nil)
+    }
+    
     func handleLogin() {
                 
         //checking the authentication:
@@ -85,7 +95,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             else{
                         
                 print("login successful")
-               self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         })
     }
@@ -119,9 +129,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 print("Create account successful")
-                let surveyController = QuestionController()
-                self.present(surveyController, animated: true, completion: nil)
-                
+                self.segueToSurvey()
             })
         })
     }

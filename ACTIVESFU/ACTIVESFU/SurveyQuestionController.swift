@@ -32,12 +32,16 @@ class QuestionController: UITableViewController {
     
     var surveyScore = 0
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.allowsMultipleSelection = true
         
         // Text at top
+
+        //application.statusBarStyle = .lightContent
+
         navigationItem.title = "Question"
         
         // The back button color/text
@@ -59,6 +63,7 @@ class QuestionController: UITableViewController {
         
     }
     
+
     func userClickedContinue() {
         
         print("you clicked me!")
@@ -78,22 +83,6 @@ class QuestionController: UITableViewController {
         }
     }
     
-    func continueToApp() {
-        
-        //TODO: check user uid
-        //TODO: register survey score into database
-        //TODO: continue to app
-        
-        let currentUID = FIRAuth.auth()?.currentUser?.uid
-        let firebaseReference = FIRDatabase.database().reference()
-        let userReferenceInDatabase = firebaseReference.child("Users").child(currentUID!)
-        
-        userReferenceInDatabase.updateChildValues(["survey": surveyScore])
-        
-        let mainController = storyboard?.instantiateViewController(withIdentifier: "mainmenuVC_ID") as! MainViewController
-        present(mainController, animated: true, completion: nil)
-        
-    }
     
     // Repeat the answer labels 5 times
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,8 +94,8 @@ class QuestionController: UITableViewController {
                 return count
             }
         }
-        
-        return 0
+    
+        return 5
     }
     
     //Recognize the cellID and create table objects accordingly
@@ -160,6 +149,20 @@ class QuestionController: UITableViewController {
 class ResultsController: UIViewController{
     
     
+    func continueToApp() {
+        
+        //TODO: check user uid
+        //TODO: register survey score into database
+        //TODO: continue to app
+        
+        //        let currentUID = FIRAuth.auth()?.currentUser?.uid
+        //        let firebaseReference = FIRDatabase.database().reference()
+        //        let userReferenceInDatabase = firebaseReference.child("Users").child(currentUID!)
+        //
+        //        userReferenceInDatabase.updateChildValues(["survey": surveyScore])
+        
+        self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
+    }
     
     var question: Question?{
         didSet {
@@ -184,7 +187,7 @@ class ResultsController: UIViewController{
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        // navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(continueToApp))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(continueToApp))
         
         navigationItem.title = "Finished"
         
