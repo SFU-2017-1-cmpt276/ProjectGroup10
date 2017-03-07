@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E0280371E6AD4D9006A9936 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E0280361E6AD4D9006A9936 /* GoogleService-Info.plist */; };
+		3E3845431E6EC1CE0065AADA /* SurveyQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3845421E6EC1CE0065AADA /* SurveyQuestionController.swift */; };
 		3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD26691E6B8EDF00729365 /* MainViewController.swift */; };
 		3EE2D2171E6BE73300070465 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE2D2141E6BE73300070465 /* CellView.swift */; };
 		3EE2D2181E6BE73300070465 /* CellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE2D2151E6BE73300070465 /* CellView.xib */; };
@@ -51,6 +52,7 @@
 		392372E78D7186AE0C5733F4 /* Pods-ACTIVESFUTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACTIVESFUTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACTIVESFUTests/Pods-ACTIVESFUTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3B23321FF8C63E1687FC1317 /* Pods_ACTIVESFU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACTIVESFU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E0280361E6AD4D9006A9936 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3E3845421E6EC1CE0065AADA /* SurveyQuestionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyQuestionController.swift; sourceTree = "<group>"; };
 		3EDD26691E6B8EDF00729365 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACTIVESFU.entitlements; sourceTree = "<group>"; };
 		3EE2D2141E6BE73300070465 /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				95107B041E451F42004F8461 /* AppDelegate.swift */,
 				95107B061E451F42004F8461 /* FindABuddyViewController.swift */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
+				3E3845421E6EC1CE0065AADA /* SurveyQuestionController.swift */,
 				9526A6421E6D54FF00B7CC7B /* Main.storyboard */,
 				3EE33E121E6CF94800C3379F /* Models */,
 				95EFB39A1E654389006E8115 /* LoginViewController.swift */,
@@ -498,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EE2D21B1E6C012800070465 /* CreateEventController.swift in Sources */,
+				3E3845431E6EC1CE0065AADA /* SurveyQuestionController.swift in Sources */,
 				95107B091E451F42004F8461 /* BuddiesViewController.swift in Sources */,
 				95107B051E451F42004F8461 /* AppDelegate.swift in Sources */,
 				3EE2D2171E6BE73300070465 /* CellView.swift in Sources */,

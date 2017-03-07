@@ -42,6 +42,7 @@ class ViewCalendarController: UIViewController {
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
     //set variables for the calendar
+    let date = Date()
     let numberOfRows = 6
     let formatter = DateFormatter()
     let testCalendar = Calendar.current
@@ -126,7 +127,7 @@ class ViewCalendarController: UIViewController {
         
         super.viewDidLoad()
         
-        formatter.dateFormat = "yyyy MM dd"
+        formatter.dateFormat = "dd.MM.yyyy"
         //        formatter.timeZone = testCalendar.timeZone
         //        formatter.locale = testCalendar.locale
         
@@ -156,8 +157,9 @@ extension ViewCalendarController: JTAppleCalendarViewDataSource, JTAppleCalendar
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters { //configure the calendar layout
         
-        let startDate = formatter.date(from: "2017 03 05")! // You can use date generated from a formatter
-        let endDate = formatter.date(from: "2100 02 01")!   // You can also use dates created from this function
+        let currentDate = formatter.string(from: date)
+        let startDate = formatter.date(from: "\(currentDate)")! // You can use date generated from a formatter
+        let endDate = formatter.date(from: "01.02.2100")!   // You can also use dates created from this function
         
         let parameters = ConfigurationParameters(startDate: startDate,
                                                  endDate: endDate,
