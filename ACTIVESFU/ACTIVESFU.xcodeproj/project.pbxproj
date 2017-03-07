@@ -18,7 +18,6 @@
 		3EE8328D1E6AC690001DA398 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8328C1E6AC690001DA398 /* Default-568h@2x.png */; };
 		4AEBE68A29AE4C4A956EA6CD /* Pods_ACTIVESFUUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70012F85D869216C2314ED26 /* Pods_ACTIVESFUUITests.framework */; };
 		95107B051E451F42004F8461 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B041E451F42004F8461 /* AppDelegate.swift */; };
-		95107B071E451F42004F8461 /* FindABuddyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B061E451F42004F8461 /* FindABuddyViewController.swift */; };
 		95107B091E451F42004F8461 /* BuddiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B081E451F42004F8461 /* BuddiesViewController.swift */; };
 		95107B0E1E451F43004F8461 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95107B0D1E451F43004F8461 /* Assets.xcassets */; };
 		95107B111E451F43004F8461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */; };
@@ -64,7 +63,6 @@
 		70012F85D869216C2314ED26 /* Pods_ACTIVESFUUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACTIVESFUUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95107B011E451F42004F8461 /* ACTIVESFU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACTIVESFU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95107B041E451F42004F8461 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		95107B061E451F42004F8461 /* FindABuddyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindABuddyViewController.swift; sourceTree = "<group>"; };
 		95107B081E451F42004F8461 /* BuddiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuddiesViewController.swift; sourceTree = "<group>"; };
 		95107B0D1E451F43004F8461 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95107B101E451F43004F8461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 				3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */,
 				3EDD26691E6B8EDF00729365 /* MainViewController.swift */,
 				95107B041E451F42004F8461 /* AppDelegate.swift */,
-				95107B061E451F42004F8461 /* FindABuddyViewController.swift */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
 				3E3845421E6EC1CE0065AADA /* SurveyQuestionController.swift */,
 				9526A6421E6D54FF00B7CC7B /* Main.storyboard */,
@@ -509,7 +506,6 @@
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
 				3EE2D2191E6BE73300070465 /* CalendarViewController.swift in Sources */,
 				95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */,
-				95107B071E451F42004F8461 /* FindABuddyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

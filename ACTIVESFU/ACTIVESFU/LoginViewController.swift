@@ -64,6 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
             let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
             let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+
             alertController.addAction(defaulAction)
             
             self.present(alertController, animated: true, completion: nil)

@@ -10,48 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--FindABuddyViewController-->
-        <scene sceneID="LUa-XQ-Vyz">
-            <objects>
-                <viewController title="Friend Finder" id="HvM-QY-qqn" userLabel="FindABuddyViewController" customClass="FindABuddyViewController" customModule="ACTIVESFU" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nmo-Sf-8dj"/>
-                        <viewControllerLayoutGuide type="bottom" id="rNn-HZ-OLx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="shB-Nb-jQ4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2W-cd-kFd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <barButtonItem image="menu" id="eNj-QE-41t">
-                                        <color key="tintColor" red="1" green="0.98401636820000005" blue="0.93968591960000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="pTr-PA-EUS" kind="showDetail" animates="NO" id="gbl-Am-tMF"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <color key="barTintColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Find a Buddy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1n-Ac-cCs">
-                                <rect key="frame" x="118" y="12" width="138" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="1" green="0.98401636820000005" blue="0.93968591960000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TeV-Qr-JwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1928.8" y="-278.41079460269867"/>
-        </scene>
         <!--MenuViewController-->
         <scene sceneID="4EH-KY-XJ8">
             <objects>
@@ -465,8 +423,5 @@
         <image name="user-icon.png" width="23" height="20"/>
         <image name="x-icon" width="19" height="19"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Gxl-1G-Z0W"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

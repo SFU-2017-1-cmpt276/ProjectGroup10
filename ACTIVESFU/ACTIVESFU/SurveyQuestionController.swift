@@ -1,46 +1,74 @@
 //
-//  ViewController.swift
-//  ActiveSFU-Survey
+//  QuestionController.swift
+//  Developed by Ryan Brown, Nathan Cheung
 //
-//  Created by CoolMac on 2017-02-28.
-//  Copyright © 2017 CoolMac. All rights reserved.
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
-// Credits to: https://github.com/purelyswift/personality_type_tutorial_completed
+//  When registering a new user, the app will ask a series of questions to the user about his activity habits and 
+//  schedule.
+//  using this, the app will be able to run matching algorithms and tailor the app to the user's preferences.
+//
+//  Bugs:
+//  users are able to choose more than one choice on questions that are supposed to be only one selection
+//
+//
+//  Changes:
+//
+//
+//
+//
+//
+//  Copyright © 2017 CMPT276 Group 10. All rights reserved.
+//  Credits to: https://github.com/purelyswift/personality_type_tutorial_completed
 
 import UIKit
 
 import Firebase
 
-struct Question{
-    var questionString: String?
-    var answers: [String]?
-    var selectedAnswerIndex: Int?
-}
 
-// Future feature would be to add the ability to select multiple answers
-// It is unfortunately very messy and cluttered, haven't figured out how to remedy that just yet
-var questionsList: [Question] = [Question(questionString: "What is your fitness experience level?", answers: ["Expert (5+ years)", "Advanced (2-5 years)", "Intermediate (1-2 years)", "Novice (< 1 year)", "Total beginner (0 experience)"], selectedAnswerIndex: nil), Question(questionString: "What best describes your fitness activity interests?", answers: ["Free weight training", "Cardiovascular training", "Yoga", "Sports", "All of the above"], selectedAnswerIndex: nil), Question(questionString: "In what time slot are you available?", answers:["8:30-10:30AM", "10:30-12:30PM", "12:30-2:30PM", "2:30-4:30PM", "4:30-6:30PM"], selectedAnswerIndex: nil), Question(questionString: "What day(s) of the week are you available?", answers: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Mon/Wed/Fri", "Tues/Thurs", "Everyday"], selectedAnswerIndex: nil), Question(questionString: "Do you have a gender matching preference?", answers:["I'd prefer to match with people of my gender", "I don't care"], selectedAnswerIndex: nil)]
+//MARK: QuestionController
 
 
 
 class QuestionController: UITableViewController {
-    
-    // The value/contents of the string are irrelevant
-    // They're just to assign a unique id to the tableview object later
+
     let cellID = "cmpt276"
     let headerId = "headerId"
     
     var surveyScore = 0
     
-
+    func userClickedContinue() {
+        
+        if let questionIndex = navigationController?.viewControllers.index(of: self) {
+            
+            questionsList[questionIndex].selectedAnswerIndex = surveyScore
+            
+            // This is what allows the user to proceed to the next question
+            if questionIndex < questionsList.count - 1 {
+                
+                print("Survey score is \(surveyScore)")
+                let questionController = QuestionController()
+                questionController.surveyScore = surveyScore
+                navigationController?.pushViewController(questionController, animated: true)
+            }
+            else {
+                
+                let resultsController = ResultsController()
+                resultsController.surveyScore = surveyScore
+                resultsController.currentSurveyQuestion = questionsList[questionIndex]
+                navigationController?.pushViewController(resultsController, animated: true)
+            }
+        }
+    }
+    
+    
+    //MARK: UITableViewController
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.allowsMultipleSelection = true
-        
-        // Text at top
-
-        //application.statusBarStyle = .lightContent
 
         navigationItem.title = "Question"
         
@@ -60,73 +88,48 @@ class QuestionController: UITableViewController {
         
         // Gets rid of the lines below the bottom cells
         tableView.tableFooterView = UIView()
-        
     }
-    
-
-    func userClickedContinue() {
-        
-        print("you clicked me!")
-        
-        if let index = navigationController?.viewControllers.index(of: self) {
-            questionsList[index].selectedAnswerIndex = surveyScore
-            
-            // This is what allows the user to proceed to the next question
-            if index < questionsList.count - 1{
-                let questionController = QuestionController()
-                navigationController?.pushViewController(questionController, animated: true)
-            } else{
-                let controller = ResultsController()
-                controller.question = questionsList[index]
-                navigationController?.pushViewController(controller, animated: true)
-            }
-        }
-    }
-    
     
     // Repeat the answer labels 5 times
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // This is for accessing the desired question
-        if let index = navigationController?.viewControllers.index(of: self) {
-            let question = questionsList[index]
-            if let count = question.answers?.count {
+        if let questionIndex = navigationController?.viewControllers.index(of: self) {
+            let surveyQuestion = questionsList[questionIndex]
+            if let count = surveyQuestion.answers?.count {
                 return count
             }
         }
-    
-        return 5
+        return 0
     }
     
     //Recognize the cellID and create table objects accordingly
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
             as! AnswerCell
         
-        cell.accessoryType = cell.isSelected ? .checkmark: .none
-        cell.selectionStyle = .none
+        tableCell.accessoryType = tableCell.isSelected ? .checkmark: .none
+        tableCell.selectionStyle = .none
         
-        if let index = navigationController?.viewControllers.index(of: self) {
-            let question = questionsList[index]
-            cell.nameLabel.text = question.answers?[indexPath.row]
+        if let questionIndex = navigationController?.viewControllers.index(of: self) {
+            let surveyQuestion = questionsList[questionIndex]
+            tableCell.nameLabel.text = surveyQuestion.answers?[indexPath.row]
         }
-        
-        return cell
+        return tableCell
     }
     
     // Recognize and create header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId)
+        let questionHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId)
             as! QuestionHeader
         
         if let index = navigationController?.viewControllers.index(of: self) {
             let question = questionsList[index]
-            header.nameLabel.text = question.questionString
+            questionHeader.nameLabel.text = question.questionString
         }
-        
-        return header
+        return questionHeader
     }
     
     // Recognzie and create results page
@@ -145,46 +148,53 @@ class QuestionController: UITableViewController {
     }
 }
 
+
+//MARK: ResultsController
+
+
 // This is what they see after they've answered the questions
-class ResultsController: UIViewController{
+class ResultsController: UIViewController {
     
+    var surveyScore = 0
     
-    func continueToApp() {
+    var currentSurveyQuestion: Question? {
         
-        //TODO: check user uid
-        //TODO: register survey score into database
-        //TODO: continue to app
-        
-        //        let currentUID = FIRAuth.auth()?.currentUser?.uid
-        //        let firebaseReference = FIRDatabase.database().reference()
-        //        let userReferenceInDatabase = firebaseReference.child("Users").child(currentUID!)
-        //
-        //        userReferenceInDatabase.updateChildValues(["survey": surveyScore])
-        
-        self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
-    }
-    
-    var question: Question?{
         didSet {
-            print(question?.selectedAnswerIndex as Any) // ??
+            
+            print(currentSurveyQuestion?.selectedAnswerIndex as Any) // ??
         }
-        
-        
     }
     
     let resultsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Thank you for answering."
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 14)
         
-        return label
+        let finishLabel = UILabel()
+        finishLabel.text = "Thank you for answering."
+        finishLabel.translatesAutoresizingMaskIntoConstraints = false
+        finishLabel.textAlignment = .center
+        finishLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        return finishLabel
         
     }()
     
+    func continueToApp() {
+        
+        let currentUID = FIRAuth.auth()?.currentUser?.uid
+        let firebaseReference = FIRDatabase.database().reference()
+        let userReferenceInDatabase = firebaseReference.child("Users").child(currentUID!)
+        
+        userReferenceInDatabase.updateChildValues(["survey": surveyScore])
+
+        self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
+    }
+
+    
+    //MARK: UIViewController
+    
+    
     // The text at the top of the page in the coloured section
-    override func viewDidLoad(){
+    override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(continueToApp))
@@ -196,73 +206,95 @@ class ResultsController: UIViewController{
         view.addSubview(resultsLabel)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":resultsLabel]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":resultsLabel]))
-        
     }
 }
+
+
+//MARK: QuestionHeader
 
 
 // Class for the header above the answers
 class QuestionHeader: UITableViewHeaderFooterView {
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        setupViews()
-    }
-    
     //Create and set label properties
     let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Question"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        
+        let questionLabel = UILabel()
+        questionLabel.text = "Question"
+        questionLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        return questionLabel
     }()
     
     //setup the constrains of the labels
-    func setupViews(){
+    func setupViews() {
+        
         addSubview(nameLabel)
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":nameLabel]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":nameLabel]))
-        
     }
     
     // Added by xcode automatically
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
+    override init(reuseIdentifier: String?) {
+        
+        super.init(reuseIdentifier: reuseIdentifier)
+        setupViews()
+    }
 }
 
 
+//MARK: AnswerCell
+
 
 // Class for our answer cells
-class AnswerCell: UITableViewCell{
+class AnswerCell: UITableViewCell {
     
     // Initialize table cell
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?){
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
     // This was added by xcode automatically after creating the class
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
     // Create and set label properties
     let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "Answers"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        let answerLabel = UILabel()
+        answerLabel.font = UIFont.systemFont(ofSize: 14)
+        answerLabel.text = "Answers"
+        answerLabel.translatesAutoresizingMaskIntoConstraints = false
+        return answerLabel
     }()
     
     // Setup the constraints of the labels
-    func setupViews(){
+    func setupViews() {
+        
         addSubview(nameLabel)
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":nameLabel]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":nameLabel]))
-        
     }
 }
 
+
+//MARK: Private
+
+
+// Future feature would be to add the ability to select multiple answers
+// It is unfortunately very messy and cluttered, haven't figured out how to remedy that just yet
+var questionsList: [Question] = [Question(questionString: "What is your fitness experience level?", answers: ["Expert (5+ years)", "Advanced (2-5 years)", "Intermediate (1-2 years)", "Novice (< 1 year)", "Total beginner (0 experience)"], selectedAnswerIndex: nil), Question(questionString: "What best describes your fitness activity interests?", answers: ["Free weight training", "Cardiovascular training", "Yoga", "Sports", "All of the above"], selectedAnswerIndex: nil), Question(questionString: "In what time slot are you available?", answers:["8:30-10:30AM", "10:30-12:30PM", "12:30-2:30PM", "2:30-4:30PM", "4:30-6:30PM"], selectedAnswerIndex: nil), Question(questionString: "What day(s) of the week are you available?", answers: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Mon/Wed/Fri", "Tues/Thurs", "Everyday"], selectedAnswerIndex: nil), Question(questionString: "Do you have a gender matching preference?", answers:["I'd prefer to match with people of my gender", "I don't care"], selectedAnswerIndex: nil)]
+
+struct Question {
+    
+    var questionString: String?
+    var answers: [String]?
+    var selectedAnswerIndex: Int?
+}
