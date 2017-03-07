@@ -122,7 +122,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="x-icon"/>
                                 <connections>
-                                    <segue destination="Zre-zV-1I7" kind="show" id="0Vh-3W-6OD"/>
+                                    <action selector="logoutButton:" destination="pTr-PA-EUS" eventType="touchUpInside" id="y6a-ro-SQv"/>
                                 </connections>
                             </button>
                         </subviews>

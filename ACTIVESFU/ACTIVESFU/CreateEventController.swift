@@ -109,7 +109,6 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
          EventRef.child(EventKey).updateChildValues(eventUpateContent)
  */
         dismiss(animated: true, completion: nil)
-
     }
     
     

@@ -9,7 +9,7 @@
 //  if yes, the app stays on the page. If not, the app forces the user out and is brought to the login screen.
 //
 //  Bugs:
-//  user starts logged in, seems like the uid is hardcoded to test99@gmail.com
+//  user starts logged in, seems like the uid is hardcoded to test99@gmail.com -FIXED
 //
 //
 //  Changes:
@@ -40,6 +40,11 @@ class MainViewController: UIViewController {
     }
     
     
+    @IBAction func logoutButton(_ sender: UIButton) {
+        
+        handleLogout()
+    }
+
     @IBAction func calendarSegue(_ sender: UIButton) {
         let calendarController = storyboard?.instantiateViewController(withIdentifier: "calendarViewID") as! ViewCalendarController
         present(calendarController, animated: true, completion: nil)
@@ -74,15 +79,8 @@ class MainViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("Users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            print(snapshot)
-        }, withCancel: nil)
-    
-        
         checkIfUserIsLoggedIn()
     }
 }

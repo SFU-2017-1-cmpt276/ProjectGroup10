@@ -83,9 +83,8 @@ class BuddiesViewController: UITableViewController{
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
-        print("This is buddies!")
+        super.viewDidLoad()
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         
