@@ -19,13 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 FIRApp.configure()
                 return true
         
-            window = UIWindow(frame: UIScreen.main.bounds)
-            window?.makeKeyAndVisible()
-            
-            window?.rootViewController = UINavigationController(rootViewController: BuddiesViewController())
-            
-            return true
-        }
+    }
     
 
     func applicationWillResignActive(_ application: UIApplication) {
