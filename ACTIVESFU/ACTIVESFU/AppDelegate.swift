@@ -17,6 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //Configure firebase
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
                 FIRApp.configure()
+        
+//        UINavigationBar.appearance().barTintColor = UIColor.orange
+//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+//        application.statusBarStyle = .lightContent
+        
+//        //Create the viewController programically
+//        let controller = QuestionController()
+//        let navigationController = UINavigationController(rootViewController: controller)
+//        window?.rootViewController = navigationController
+        
                 return true
         
     }

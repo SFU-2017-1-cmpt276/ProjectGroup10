@@ -1,27 +1,40 @@
 //
-//  SecondViewController.swift
-//  ACTIVESFU
+//  BuddiesViewController.swift
+//  Developed by Ryan Brown, Nathan Cheung
 //
-//  Created by Bronwyn Biro on 2017-02-03.
-//  Copyright © 2017 CMPT276 Group 10. All rights reserved.
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
-// Worked on by: Ryan, Nathan, Bronwyn
+//  Allows the user to view previous buddies he or she has matched with throughout the app's use.
+//  this also branches into the chat function where users can chat with matched buddies
+//
+//  Bugs:
+//  Users in the table are all users in the database, not the ones matched to the current user.
+//
+//
+//  Changes:
+//
+//
+//
+//
 
 import UIKit
+
 import Firebase
 import FirebaseAuth
 
 
 //MARK: BuddiesViewController
 
+
 class BuddiesViewController: UITableViewController{
     
     
     //MARK: Internal
+    
     var cellID = "cellID"
     var userFormatInDatabase = [User]()
     
-    
+
     @IBAction func backMenu(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -35,6 +48,7 @@ class BuddiesViewController: UITableViewController{
                 
                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
                 singleUserInDatabase.setValuesForKeys(dictionary)
+                
                 self.userFormatInDatabase.append(singleUserInDatabase)
                 
                 // This will crash because of background thread, so the dispatch fixes it
@@ -52,20 +66,20 @@ class BuddiesViewController: UITableViewController{
     
 
     func viewUsernameInDatabase() {
-        /*
+        
         let UID = FIRAuth.auth()?.currentUser?.uid
-        print("current user UID..", UID)
+
         FIRDatabase.database().reference().child("Users").child(UID!).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: Any] {
                 self.navigationItem.title = dictionary["user"] as? String
             }
+
  
         }, withCancel: nil)
-  */
+ 
     }
 
-    
 
     
     //MARK: UITableViewController
@@ -84,10 +98,12 @@ class BuddiesViewController: UITableViewController{
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return userFormatInDatabase.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let userInDatabase = userFormatInDatabase[indexPath.row]
         
@@ -97,7 +113,6 @@ class BuddiesViewController: UITableViewController{
         return tableCell
         
     }
-    
     
     
     //MARK: UserCell
@@ -114,6 +129,7 @@ class BuddiesViewController: UITableViewController{
             
             fatalError("init(coder:) has not been implemented")
         }
+
     }
     
     func showChatControllerForUser(_ user: User) {
@@ -140,5 +156,4 @@ class BuddiesViewController: UITableViewController{
         navigationController?.pushViewController(chatLogController, animated: true)
     }
 }
-    
 
