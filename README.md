@@ -52,6 +52,19 @@ Please note that you must open ACTIVESFU.xcworkspace, not ACTIVESFU.xcodeproj, d
 - Location tracking to measure fitness progress
 - View how many buddies you have made, your total event hours, and the percentage of your time spent on different activity types
 
+## Screenshots
+![Screenshot](/images/login.PNG)
+![Screenshot](/images/menu.PNG)
+![Screenshot](/images/login.PNG)
+![Screenshot](/images/create.PNG)
+![Screenshot](/images/shake.PNG)
+![Screenshot](/images/calendar2.PNG)
+![Screenshot](/images/progress.PNG)
+![Screenshot](/images/common.PNG)
+![Screenshot](/images/chat.PNG)
+![Screenshot](/images/buddies.PNG)
+![Screenshot](/images/profile.PNG)
+
 
 ## Authors
 
